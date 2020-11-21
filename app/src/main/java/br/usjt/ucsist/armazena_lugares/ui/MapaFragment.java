@@ -33,9 +33,9 @@ public class MapaFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            LatLng saojudas = new LatLng(-23.56884022, -46.71378136);
+            googleMap.addMarker(new MarkerOptions().position(saojudas).title("Universidade São Judas"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(saojudas));
         }
     };
 
