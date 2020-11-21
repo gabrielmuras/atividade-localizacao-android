@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.orhanobut.hawk.Hawk;
 
@@ -72,11 +73,11 @@ public class MainActivity extends AppCompatActivity {
                                 "PERFIL");
                         return true;
 
-                    case R.id.configuracao:
+                    case R.id.mapa:
                         replaceFragment(R.id.frameLayoutMain,
-                                ConfiguracaoFragment.newInstance("",""),
-                                "CONFIGURACAOFRAGMENT",
-                                "CONFIGURACAO");
+                                new MapaFragment(),
+                                "MAPAFRAGMENT",
+                                "MAPA");
                         return true;
 
 
@@ -108,10 +109,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.editar:
-                Intent intent = new Intent(this, CadastroActivity.class);
-                startActivity(intent);
-                return (true);
             case R.id.sair:
                 finish();
                 return (true);
