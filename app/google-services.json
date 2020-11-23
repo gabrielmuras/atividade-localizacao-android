@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "498328728998",
+    "firebase_url": "https://localiza-cadastro.firebaseio.com",
+    "project_id": "localiza-cadastro",
+    "storage_bucket": "localiza-cadastro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498328728998:android:37a6305299b90701208b67",
+        "android_client_info": {
+          "package_name": "br.usjt.ucsist.armazena_lugares"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498328728998-18becleqiu72sujhgq8g1lejn7vaee2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjcI2XEcBtkRfQx7spvoj9kMlcm8jEHH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498328728998-18becleqiu72sujhgq8g1lejn7vaee2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
