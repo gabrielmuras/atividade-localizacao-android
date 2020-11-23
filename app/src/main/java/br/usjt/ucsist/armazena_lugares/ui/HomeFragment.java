@@ -2,6 +2,7 @@ package br.usjt.ucsist.armazena_lugares.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,38 +11,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import br.usjt.ucsist.armazena_lugares.R;
 import br.usjt.ucsist.armazena_lugares.model.Lugar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    private RecyclerView listaFirestore;
+    private FirebaseFirestore firebaseFirestore;
+    private FirestoreRecyclerAdapter adapter;
+
+
+
     private String mParam1;
     private String mParam2;
 
-    private View lugarView;
-
-    private RecyclerView listaLugares;
-
-    private DatabaseReference lugarRef;
-
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -61,34 +58,81 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
-        lugarView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        listaLugares = (RecyclerView) lugarView.findViewById(R.id.listaLugar);
-        listaLugares.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        lugarRef = FirebaseDatabase.getInstance().getReference().child("Lugar");
-
-        return lugarView;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        listaFirestore = view.findViewById(R.id.listaFirestore);
+
+        Query query = firebaseFirestore.collection("Lugares");
+
+        FirestoreRecyclerOptions<Lugar> options = new FirestoreRecyclerOptions.Builder<Lugar>().
+                setQuery(query, Lugar.class)
+                .build();
+
+        adapter = new FirestoreRecyclerAdapter<Lugar, HomeFragment.LugarViewHolder>(options) {
+            @NonNull
+            @Override
+            public HomeFragment.LugarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lugar_item, parent, false);
+                return new HomeFragment.LugarViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull HomeFragment.LugarViewHolder holder, int position, @NonNull Lugar model) {
+                holder.listaLatitude.setText(model.getLatitude());
+                holder.listaLongitude.setText(model.getLongitude());
+                holder.listaDescricao.setText(model.getDescricao());
+                holder.listaDataCadastro.setText(model.getDataCadastro());
+            }
+        };
+
+        listaFirestore.setHasFixedSize(true);
+        listaFirestore.setLayoutManager(new LinearLayoutManager(getActivity()));
+        listaFirestore.setAdapter(adapter);
+    }
+
+    public class LugarViewHolder extends RecyclerView.ViewHolder{
+
+        private TextView listaLatitude;
+        private TextView listaLongitude;
+        private TextView listaDescricao;
+        private TextView listaDataCadastro;
+
+
+        public LugarViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            listaLatitude  = itemView.findViewById(R.id.listaLatitude);
+            listaLongitude = itemView.findViewById(R.id.listaLongitude);
+            listaDescricao = itemView.findViewById(R.id.listaDescricao);
+            listaDataCadastro = itemView.findViewById(R.id.listaDataCadastro);
+
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        adapter.startListening();
 
-        //FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Lugar>()
-          //      .setQuery().build();
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
 }

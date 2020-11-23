@@ -4,21 +4,25 @@
     <item android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:title="Home"
+
         />
 
     <item android:id="@+id/lugar"
         android:icon="@drawable/ic_lugar"
         android:title="Lugar"
+
         />
 
     <item android:id="@+id/perfil"
         android:icon="@drawable/ic_perfil"
         android:title="Perfil"
+
         />
 
     <item android:id="@+id/mapa"
         android:icon="@drawable/ic_mapa"
         android:title="Mapa"
+
         />
 
 </menu>

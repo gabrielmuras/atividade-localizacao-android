@@ -62,7 +62,7 @@ public class LugarActivity extends AppCompatActivity {
         listaFirestore.setAdapter(adapter);
     }
 
-    private class LugarViewHolder extends RecyclerView.ViewHolder{
+    public class LugarViewHolder extends RecyclerView.ViewHolder{
 
         private TextView listaLatitude;
         private TextView listaLongitude;
