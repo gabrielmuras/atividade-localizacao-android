@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,6 +23,8 @@ import com.google.firebase.firestore.Query;
 
 import br.usjt.ucsist.armazena_lugares.R;
 import br.usjt.ucsist.armazena_lugares.model.Lugar;
+
+import static android.content.ContentValues.TAG;
 
 
 public class HomeFragment extends Fragment {
@@ -41,6 +46,9 @@ public class HomeFragment extends Fragment {
 
     }
 
+    public interface LongKeyPressedEventListner {
+        void longKeyPressed(int position);
+    }
 
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
@@ -81,6 +89,9 @@ public class HomeFragment extends Fragment {
                 .build();
 
         adapter = new FirestoreRecyclerAdapter<Lugar, HomeFragment.LugarViewHolder>(options) {
+
+            LongKeyPressedEventListner longKeyPressedEventListner;
+
             @NonNull
             @Override
             public HomeFragment.LugarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -95,6 +106,18 @@ public class HomeFragment extends Fragment {
                 holder.listaLongitude.setText(model.getLongitude());
                 holder.listaDescricao.setText(model.getDescricao());
                 holder.listaDataCadastro.setText(model.getDataCadastro());
+
+                holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+
+                        holder.deleta();
+                        String id_lugar = "teste";
+                        getSnapshots().getSnapshot(holder.deleta()).getReference().delete();
+                        //Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                });
             }
         };
 
@@ -120,6 +143,13 @@ public class HomeFragment extends Fragment {
             listaDataCadastro = itemView.findViewById(R.id.listaDataCadastro);
 
         }
+
+        public int deleta() {
+            //Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show();
+            return getAdapterPosition();
+
+
+        }
     }
 
     @Override
@@ -133,6 +163,10 @@ public class HomeFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void deleta(int position){
+
     }
 
 }
