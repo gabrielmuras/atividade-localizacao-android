@@ -70,10 +70,10 @@ public class InserirActivity extends AppCompatActivity {
         //editDescricao.getText().toString());
 
         String endereco = editEndereco.getText().toString();
-        //tDate data = Calendar.getInstance().getTime();
+        Date data = Calendar.getInstance().getTime();
 
-        //DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd-mm-yyyy");
-        //String date = dateFormat.format(data);
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd-MM-yyyy");
+        String date = dateFormat.format(data);
 
         Geocoder geoCoder = new Geocoder(this);
 
@@ -85,7 +85,7 @@ public class InserirActivity extends AppCompatActivity {
         String lat = Double.toString((localizacao.getLatitude()));
         String lon = Double.toString((localizacao.getLongitude()));
 
-        lugar = new Lugar(endereco, lat, lon, "Teste", "date");
+        lugar = new Lugar(endereco, lat, lon, "Teste", date);
 
         db.collection("Lugares").add(lugar);
     }
