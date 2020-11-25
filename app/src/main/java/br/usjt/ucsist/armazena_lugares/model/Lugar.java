@@ -3,10 +3,12 @@ package br.usjt.ucsist.armazena_lugares.model;
 public class Lugar {
 
 
-    public String descricao, dataCadastro, latitude, longitude;
+    public String endereco, descricao, dataCadastro, latitude, longitude;
 
 
-    public Lugar(String latitude, String longitude, String descricao, String dataCadastro) {
+    public Lugar(String endereco, String latitude, String longitude, String descricao, String dataCadastro) {
+
+        this.endereco = endereco;
         this.latitude = latitude;
         this.longitude= longitude;
         this.descricao = descricao;
@@ -14,6 +16,9 @@ public class Lugar {
     }
 
     public Lugar() {
+    }
+    public String getEndereco() {
+        return endereco;
     }
 
     public String getLatitude() {
@@ -34,6 +39,10 @@ public class Lugar {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getDataCadastro() {

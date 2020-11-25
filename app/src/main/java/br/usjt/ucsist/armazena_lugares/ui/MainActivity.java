@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.sair:
-                Intent intent = new Intent(this, LugarActivity.class);
+                Intent intent = new Intent(this, InserirActivity.class);
                 startActivity(intent);
                 return (true);
         }

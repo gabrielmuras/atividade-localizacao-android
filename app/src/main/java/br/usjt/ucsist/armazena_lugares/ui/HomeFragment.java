@@ -102,6 +102,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull HomeFragment.LugarViewHolder holder, int position, @NonNull Lugar model) {
+                holder.listaEndereco.setText(model.getEndereco());
                 holder.listaLatitude.setText(model.getLatitude());
                 holder.listaLongitude.setText(model.getLongitude());
                 holder.listaDescricao.setText(model.getDescricao());
@@ -128,6 +129,7 @@ public class HomeFragment extends Fragment {
 
     public class LugarViewHolder extends RecyclerView.ViewHolder{
 
+        private TextView listaEndereco;
         private TextView listaLatitude;
         private TextView listaLongitude;
         private TextView listaDescricao;
@@ -137,6 +139,7 @@ public class HomeFragment extends Fragment {
         public LugarViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            listaEndereco =  itemView.findViewById(R.id.listaEndereco);
             listaLatitude  = itemView.findViewById(R.id.listaLatitude);
             listaLongitude = itemView.findViewById(R.id.listaLongitude);
             listaDescricao = itemView.findViewById(R.id.listaDescricao);

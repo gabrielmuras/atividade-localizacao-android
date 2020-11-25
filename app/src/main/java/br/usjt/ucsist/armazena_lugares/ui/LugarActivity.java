@@ -53,7 +53,7 @@ public class LugarActivity extends AppCompatActivity {
                 holder.listaLatitude.setText(model.getLatitude());
                 holder.listaLongitude.setText(model.getLongitude());
                 holder.listaDescricao.setText(model.getDescricao());
-                holder.listaDataCadastro.setText(model.getDataCadastro());
+                holder.listaDataCadastro.setText((CharSequence) model.getDataCadastro());
             }
         };
 
