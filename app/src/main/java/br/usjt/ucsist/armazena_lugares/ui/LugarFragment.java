@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.orhanobut.hawk.Hawk;
@@ -109,27 +110,56 @@ public class LugarFragment extends Fragment {
 
     public void salvarL() throws IOException {
 
-        //editEndereco.getText().toString());
-        //editDescricao.getText().toString());
 
         String endereco = editEndereco.getText().toString();
-        Date data = Calendar.getInstance().getTime();
-
-        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd-MM-yyyy");
-        String date = dateFormat.format(data);
+        String descricao = editDescricao.getText().toString();
 
         Geocoder geoCoder = new Geocoder(getActivity());
 
         List<Address> latLong = geoCoder.getFromLocationName(endereco, 1);;
 
+        try {
 
-        Address localizacao = latLong.get(0);
+            Address localizacao = latLong.get(0);
 
-        String lat = Double.toString((localizacao.getLatitude()));
-        String lon = Double.toString((localizacao.getLongitude()));
+            String lat = Double.toString((localizacao.getLatitude()));
+            String lon = Double.toString((localizacao.getLongitude()));
 
-        lugar = new Lugar(endereco, lat, lon, "Teste", date);
+            lugar = new Lugar(endereco, lat, lon, descricao, pegaData(), pegaTimeStamp());
 
-        db.collection("Lugares").add(lugar);
+            try {
+
+                db.collection("Lugares").add(lugar);
+
+            } catch (Exception e) {
+
+                Toast.makeText(getActivity(), "Não foi possível inserir no banco de dados, verifique sua conexão",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Lugar não encontrado",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    }
+    
+    
+    public String pegaData() {
+        
+        DateFormat dateFormat = new SimpleDateFormat("k:mm - dd/MM/yy");
+        Date date = Calendar.getInstance().getTime();
+        String data = dateFormat.format(date);
+        
+        return data;
+    }
+
+    public long pegaTimeStamp(){
+
+        long epoch = System.currentTimeMillis()/1000;
+
+        return epoch;
     }
 }

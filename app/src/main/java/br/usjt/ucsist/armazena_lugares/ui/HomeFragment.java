@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
         firebaseFirestore = FirebaseFirestore.getInstance();
         listaFirestore = view.findViewById(R.id.listaFirestore);
 
-        Query query = firebaseFirestore.collection("Lugares");
+        Query query = firebaseFirestore.collection("Lugares").orderBy("timestamp", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<Lugar> options = new FirestoreRecyclerOptions.Builder<Lugar>().
                 setQuery(query, Lugar.class)
