@@ -1,5 +1,7 @@
 package br.usjt.ucsist.armazena_lugares.ui;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -9,19 +11,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.orhanobut.hawk.Hawk;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import br.usjt.ucsist.armazena_lugares.R;
+import br.usjt.ucsist.armazena_lugares.model.Lugar;
 
 
 public class LugarFragment extends Fragment {
 
-
+    private Lugar lugar;
+    private EditText editEndereco, editDescricao;
+    //private Context context;
+    private Button buttonSalvar;
+    // private DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd-mm-yyyy");
+    FirebaseFirestore db;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -30,7 +46,6 @@ public class LugarFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private View lugarView;
 
 
 
@@ -68,5 +83,53 @@ public class LugarFragment extends Fragment {
 
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        editEndereco = view.findViewById(R.id.editEnderecoL);
+        editDescricao = view.findViewById(R.id.editDescricaoL);
+        buttonSalvar = view.findViewById(R.id.buttonConcluirL);
+
+
+
+        db = FirebaseFirestore.getInstance();
+
+        buttonSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    salvarL();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    public void salvarL() throws IOException {
+
+        //editEndereco.getText().toString());
+        //editDescricao.getText().toString());
+
+        String endereco = editEndereco.getText().toString();
+        Date data = Calendar.getInstance().getTime();
+
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss dd-MM-yyyy");
+        String date = dateFormat.format(data);
+
+        Geocoder geoCoder = new Geocoder(getActivity());
+
+        List<Address> latLong = geoCoder.getFromLocationName(endereco, 1);;
+
+
+        Address localizacao = latLong.get(0);
+
+        String lat = Double.toString((localizacao.getLatitude()));
+        String lon = Double.toString((localizacao.getLongitude()));
+
+        lugar = new Lugar(endereco, lat, lon, "Teste", date);
+
+        db.collection("Lugares").add(lugar);
+    }
 }
