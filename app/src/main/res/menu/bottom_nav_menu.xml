@@ -8,8 +8,8 @@
         />
 
     <item android:id="@+id/lugar"
-        android:icon="@drawable/ic_lugar"
-        android:title="Lugar"
+        android:icon="@drawable/ic_lugar_add"
+        android:title="Adicionar Lugar"
 
         />
 
