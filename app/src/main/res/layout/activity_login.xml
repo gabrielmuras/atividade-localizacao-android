@@ -21,15 +21,28 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="350dp"
+        android:src="@drawable/logo2"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTitulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo"
+        ></ImageView>
+
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:hint="Email"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
@@ -62,23 +75,19 @@
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:onClick="login"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/white"
-        android:textSize="12pt"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:background="@color/colorPrimary"
+        android:onClick="login"
         android:text="LOGIN"
+        android:textColor="@color/white"
+        android:textSize="12pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-
-
-
-
+        app:layout_constraintTop_toBottomOf="@id/textViewNovoCadastro"
+        app:layout_constraintVertical_bias="0.14" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
