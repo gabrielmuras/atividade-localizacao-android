@@ -15,8 +15,9 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="12pt"
-        android:text="Localize-se"
+        android:textSize="16pt"
+        android:text="Opa, me achei!"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

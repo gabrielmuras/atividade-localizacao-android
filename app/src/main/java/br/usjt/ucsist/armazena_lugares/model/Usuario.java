@@ -9,13 +9,13 @@ public class Usuario {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String nome;
-    private String cpf;
+
     private String email;
     private String senha;
 
-    public Usuario(String nome, String cpf, String email, String senha, String curso) {
+    public Usuario(String nome, String email, String senha, String curso) {
         this.nome = nome;
-        this.cpf = cpf;
+
         this.email = email;
         this.senha = senha;
     }
@@ -37,14 +37,6 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getEmail() {

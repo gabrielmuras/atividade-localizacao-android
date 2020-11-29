@@ -74,7 +74,6 @@ public class PerfilFragment extends Fragment {
         Hawk.init(getActivity()).build();
 
         editTextNome = view.findViewById(R.id.editTextNomeF);
-        editTextCPF = view.findViewById(R.id.editTextCpfF);
         editTextEmail = view.findViewById(R.id.editTextEmailF);
         editTextSenha = view.findViewById(R.id.editTextSenhaF);
         buttonSalvar = view.findViewById(R.id.buttonConcluirF);
@@ -103,7 +102,6 @@ public class PerfilFragment extends Fragment {
         if (usuario != null && usuario.getId() > 0) {
             usuarioCorrente = usuario;
             editTextNome.setText(usuario.getNome());
-            editTextCPF.setText(usuario.getCpf());
             editTextEmail.setText(usuario.getEmail());
             editTextSenha.setText(usuario.getSenha());
         }
@@ -112,7 +110,6 @@ public class PerfilFragment extends Fragment {
     public void salvar() {
 
         usuarioCorrente.setNome(editTextNome.getText().toString());
-        usuarioCorrente.setCpf(editTextCPF.getText().toString());
         usuarioCorrente.setEmail(editTextEmail.getText().toString());
         usuarioCorrente.setSenha(editTextSenha.getText().toString());
         usuarioViewModel.insert(usuarioCorrente);

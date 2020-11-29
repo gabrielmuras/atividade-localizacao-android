@@ -100,6 +100,8 @@ public class LugarFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     salvarL();
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -130,6 +132,17 @@ public class LugarFragment extends Fragment {
             try {
 
                 db.collection("Lugares").add(lugar);
+
+                try {
+                    editEndereco.setText("");
+                    editDescricao.setText("");
+
+                    Toast.makeText(getActivity(), "Lugar adicionado com sucesso",
+                            Toast.LENGTH_SHORT).show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             } catch (Exception e) {
 

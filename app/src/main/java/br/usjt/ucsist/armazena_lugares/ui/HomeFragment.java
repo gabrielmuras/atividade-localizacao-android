@@ -113,9 +113,8 @@ public class HomeFragment extends Fragment {
                     public boolean onLongClick(View v) {
 
                         holder.deleta();
-                        String id_lugar = "teste";
                         getSnapshots().getSnapshot(holder.deleta()).getReference().delete();
-                        //Toast.makeText(getActivity(),"Text!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"Lugar deletado",Toast.LENGTH_SHORT).show();
                         return false;
                     }
                 });

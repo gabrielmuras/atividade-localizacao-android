@@ -32,7 +32,6 @@ public class CadastroActivity extends AppCompatActivity {
         Hawk.init(this).build();
 
         editTextNome = findViewById(R.id.editTextNome);
-        editTextCPF = findViewById(R.id.editTextCpf);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextSenha = findViewById(R.id.editTextSenha);
 
@@ -53,7 +52,6 @@ public class CadastroActivity extends AppCompatActivity {
         if (usuario != null && usuario.getId() > 0) {
             usuarioCorrente = usuario;
             editTextNome.setText(usuario.getNome());
-            editTextCPF.setText(usuario.getCpf());
             editTextEmail.setText(usuario.getEmail());
             editTextSenha.setText(usuario.getSenha());
         }
@@ -62,7 +60,6 @@ public class CadastroActivity extends AppCompatActivity {
     public void salvar(View view) {
 
         usuarioCorrente.setNome(editTextNome.getText().toString());
-        usuarioCorrente.setCpf(editTextCPF.getText().toString());
         usuarioCorrente.setEmail(editTextEmail.getText().toString());
         usuarioCorrente.setSenha(editTextSenha.getText().toString());
         usuarioViewModel.insert(usuarioCorrente);
